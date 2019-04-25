@@ -33,7 +33,7 @@ def detectShape(path):
 	img = cv2.GaussianBlur(img, (3,3), 0)
 	kernel = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]])
 	img = cv2.filter2D(img, -1, kernel)
-
+	
 	drugShape = 'UNDEFINED'
 	edges = cv2.Canny(img,100,200)
 	contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
