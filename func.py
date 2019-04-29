@@ -48,8 +48,8 @@ def detectShape(path):
 	x,y,w,h = cv2.boundingRect(contours[0]) # offsets - with this you get 'mask'
 
 
-	cv2.drawContours(img, [contours[0]], 0,(255,0,0), 2)
-	cv2.imshow(path, img)
+	#cv2.drawContours(img, [contours[0]], 0,(255,0,0), 2)
+	#cv2.imshow(path, img)
 
 
 
@@ -105,6 +105,33 @@ def detectDrug(path):
 
 	return drugShape, color
 
+
+def getName(path):
+	Name = 'UNDEFINED'
+	dictt = {}
+	dictt[("Circle", "lightPink")] = "Milga"
+	dictt[("Ellipse", "white")] = "Panadol"
+	dictt[("Circle", "pink")] = "Bruffin"
+	dictt[("Ellipse", "yellow")] = "Ketofan"
+	dictt[("Circle", "white")] = "Paracetamol"
+	dictt[("Ellipse", "red")] = "Comtrex"
+	dictt[("Circle", "lightBlue")] = "Alphintern"
+	dictt[("Circle", "orange")] = "Cataflam"
+	
+
+
+
+	drugShape, color = detectDrug(path)
+
+
+
+
+	Name = dictt[(drugShape, color)]
+	return Name
+
+
+
+
 print('panLine', detectDrug('PanLine.jpeg'))
 print('panAE', detectDrug('PanAE.jpeg'))
 print('brufin', detectDrug('bruf.jpg'))
@@ -146,6 +173,9 @@ print('para2', detectDrug('para2.jpg'))
 print('para3', detectDrug('para3.jpg'))
 print('para4', detectDrug('para4.jpg'))
 
+print('cataflam', detectDrug('cataflamsada.png'))
+
+print(getName('milga3.jpg'))
 
 # print('hexagon', detectDrug('hexagon.png'))
 # print('rec', detectDrug('rec.jpg'))
@@ -153,6 +183,10 @@ print('para4', detectDrug('para4.jpg'))
 # print('pentagon', detectDrug('pentagon.jpg'))
 
 # print(detectDrug('/media/yomna/New Volume/2nd term/Project/PanLine.jpeg'))
+
+
+
+
 
 cv2.waitKey()
 
