@@ -102,7 +102,7 @@ def detectDrug(path):
 	# print(lenn,color)
 	drugShape= 'UNDEFINED'
 	drugName= 'UNDEFINED'
-	print(lenn)
+	#print(lenn)
 	if 5 < lenn < 13:
 		drugShape = 'Ellipse'
 	elif lenn == 6:
@@ -129,14 +129,23 @@ def detectDrug(path):
 def getName(path):
 	Name = 'UNDEFINED'
 	dictt = {}
-	dictt[("Circle", "lightPink")] = "Milga"
+	#Milga
+	dictt[("Circle", "red")] = "Milga"
+	#Panadol
 	dictt[("Ellipse", "white")] = "Panadol"
+	#Bruffin
 	dictt[("Circle", "pink")] = "Bruffin"
+	#Ketofan
 	dictt[("Ellipse", "yellow")] = "Ketofan"
+	#Paracetamol
 	dictt[("Circle", "white")] = "Paracetamol"
+	#Comtrex
 	dictt[("Ellipse", "red")] = "Comtrex"
-	dictt[("Circle", "lightBlue")] = "Alphintern"
+	#Alphintern
+	dictt[("Circle", "blue")] = "Alphintern"
+	#Cataflam
 	dictt[("Circle", "orange")] = "Cataflam"
+
 	
 
 
@@ -152,41 +161,75 @@ def getName(path):
 
 
 
-print('panLine', detectDrug('PanLine.jpeg'))
-print('panAE', detectDrug('PanAE.jpeg'))
-print('brufin', detectDrug('bruf.jpg'))
+# print('panLine', detectDrug('PanLine.jpeg'))
+# print('panAE', detectDrug('PanAE.jpeg'))
+# print('brufin', detectDrug('bruf.jpg'))
 
-print('com1', detectDrug('com1.jpg'))
-print('com2', detectDrug('com2.jpg'))
-print('com3	', detectDrug('com3.jpg'))
+# print('com1', detectDrug('com1.jpg'))
+# print('com2', detectDrug('com2.jpg'))
+# print('com3	', detectDrug('com3.jpg'))
 
-print('alpha1', detectDrug('alpha1.jpg'))
-print('alpha2', detectDrug('alpha2.jpg'))
-print('alpha3', detectDrug('alpha3.jpg'))
-
-
-print('kito1', detectDrug('kito1.jpg'))
-print('kito2', detectDrug('kito2.jpg'))
-print('kito3', detectDrug('kito3.jpg'))
-print('kito4', detectDrug('kito4.jpg'))
+# print('alpha1', detectDrug('alpha1.jpg'))
+# print('alpha2', detectDrug('alpha2.jpg'))
+# print('alpha3', detectDrug('alpha3.jpg'))
 
 
-print('milga1', detectDrug('milga1.jpg'))
-print('milga2', detectDrug('milga2.jpg'))
-print('milga3', detectDrug('milga3.jpg'))
+# print('kito1', detectDrug('kito1.jpg'))
+# print('kito2', detectDrug('kito2.jpg'))
+# print('kito3', detectDrug('kito3.jpg'))
+# print('kito4', detectDrug('kito4.jpg'))
 
 
-print('para1', detectDrug('para1.jpg'))
-print('para2', detectDrug('para2.jpg'))
-print('para3', detectDrug('para3.jpg'))
-print('para4', detectDrug('para4.jpg'))
-
-print('cataflam', detectDrug('cataflamsada.png'))
-
-#print(getName('milga3.jpg'))
+# print('milga1', detectDrug('milga1.jpg'))
+# print('milga2', detectDrug('milga2.jpg'))
+# print('milga3', detectDrug('milga3.jpg'))
 
 
+# print('para1', detectDrug('para1.jpg'))
+# print('para2', detectDrug('para2.jpg'))
+# print('para3', detectDrug('para3.jpg'))
+# print('para4', detectDrug('para4.jpg'))
 
+# print('cataflam', detectDrug('cataflamsada.png'))
+
+print'Expected: ', 'Milga','Result: ',getName('milga1.jpg')
+print'Expected: ', 'Milga','Result: ',getName('milga2.jpg')
+print'Expected: ', 'Milga','Result: ',getName('milga3.jpg')
+print('\n')
+print'Expected: ', 'com','Result: ',getName('com1.jpg')
+print'Expected: ', 'com','Result: ',getName('com2.jpg')
+print'Expected: ', 'com','Result: ',getName('com3.jpg')
+print('\n')
+print'Expected: ', 'alpha','Result: ',getName('alpha1.jpg')
+print'Expected: ', 'alpha','Result: ',getName('alpha2.jpg')
+print'Expected: ', 'alpha','Result: ',getName('alpha3.jpg')
+print('\n')
+print'Expected: ', 'kito','Result: ',getName('kito1.jpg')
+print'Expected: ', 'kito','Result: ',getName('kito2.jpg')
+print'Expected: ', 'kito','Result: ',getName('kito3.jpg')
+print'Expected: ', 'kito','Result: ',getName('kito4.jpg')
+
+print('\n')
+
+print'Expected: ', 'para','Result: ',getName('para1.jpg')
+print'Expected: ', 'para','Result: ',getName('para2.jpg')
+print'Expected: ', 'para','Result: ',getName('para3.jpg')
+print'Expected: ', 'para','Result: ',getName('para4.jpg')
+
+print('\n')
+
+print'Expected: ', 'pan','Result: ',getName('PanAE.jpeg')
+print'Expected: ', 'pan','Result: ',getName('PanLine.jpeg')
+
+print('\n')
+
+print 'Expected: ', 'Bruffin','Result: ',getName('bruf.jpg')
+
+print('\n')
+
+print'Expected: ', 'cataflam','Result: ',getName('cataflamsada.png')
+
+print('\n')
 
 
 cv2.waitKey()
