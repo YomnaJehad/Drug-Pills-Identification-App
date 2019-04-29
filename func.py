@@ -66,13 +66,34 @@ def detectShape(path):
 	colors = np.array(cv2.mean(newImage)).astype(np.uint8)
 	prediction = 'n.a.'
 
-	# using rbg
-	prediction = knn_classifier.main('training.data', np.array([colors[2], colors[1], colors[0]]))
 
-	# using hsv
-	# colors = rgb2hsv(colors[2], colors[1], colors[0])
-	# prediction = knn_classifier.main('newData.data', np.array([colors[0], colors[1], colors[2]]))
-	# print(colors[2], colors[1], colors[0])
+	#INCREASE SATURATION BEFORE WHITE DETECTION FOR LIGHT CLOLORS ELEMINATION
+	# cv2.imshow('before', newImage)
+	hsvImage = cv2.cvtColor(newImage, cv2.COLOR_BGR2HSV)
+	
+	hsvImage[:,:,1]=hsvImage[:,:,1] *2.5
+
+	backImage = cv2.cvtColor(hsvImage, cv2.COLOR_HSV2BGR)
+ 	# cv2.imshow('after', backImage)
+
+
+	# using rbg
+	backColors = np.array(cv2.mean(backImage)).astype(np.uint8)
+	prediction = knn_classifier.main('training.data', np.array([backColors[2], backColors[1], backColors[0]]))
+	# print(np.array([backColors[2], backColors[1], backColors[0]]))
+	if prediction =='white':
+		#RED GREEN BLUE
+		if backColors[2] >= 180 and backColors[1] >= 150 and backColors[0] <= 90 :
+			prediction = 'other'	
+
+
+
+	if prediction == 'other':
+
+		# using hsv
+		colors = rgb2hsv(colors[2], colors[1], colors[0])
+		prediction = knn_classifier.main('newData.data', np.array([colors[0], colors[1], colors[2]]))
+		# print(colors[2], colors[1], colors[0])
 
 	return len(approx), prediction, contours[0]
 
@@ -136,18 +157,6 @@ print('panLine', detectDrug('PanLine.jpeg'))
 print('panAE', detectDrug('PanAE.jpeg'))
 print('brufin', detectDrug('bruf.jpg'))
 
-# print('cataflam1', detectDrug('Shapes/Cataflam/1.jpg'))
-# print('cataflam2', detectDrug('Shapes/Cataflam/2.jpg'))
-# print('cataflam3', detectDrug('Shapes/Cataflam/3.jpg'))
-# print('cataflam4', detectDrug('Shapes/Cataflam/4.jpg'))
-# print('cataflam5', detectDrug('Shapes/Cataflam/5.jpg'))
-# print('cataflam6', detectDrug('Shapes/Cataflam/6.jpg'))
-# print('cataflam7', detectDrug('Shapes/Cataflam/7.jpg'))
-# print('cataflam8', detectDrug('Shapes/Cataflam/8.jpg'))
-# print('cataflam9', detectDrug('Shapes/Cataflam/9.jpg'))
-# print('cataflam10', detectDrug('Shapes/Cataflam/10.jpg'))
-# print('cataflam11', detectDrug('Shapes/Cataflam/11.jpg'))
-
 print('com1', detectDrug('com1.jpg'))
 print('com2', detectDrug('com2.jpg'))
 print('com3	', detectDrug('com3.jpg'))
@@ -175,14 +184,7 @@ print('para4', detectDrug('para4.jpg'))
 
 print('cataflam', detectDrug('cataflamsada.png'))
 
-print(getName('milga3.jpg'))
-
-# print('hexagon', detectDrug('hexagon.png'))
-# print('rec', detectDrug('rec.jpg'))
-# print('square', detectDrug('square.jpeg'))
-# print('pentagon', detectDrug('pentagon.jpg'))
-
-# print(detectDrug('/media/yomna/New Volume/2nd term/Project/PanLine.jpeg'))
+#print(getName('milga3.jpg'))
 
 
 
