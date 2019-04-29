@@ -36,7 +36,7 @@ def detectShape(path):
 	
 	drugShape = 'UNDEFINED'
 	edges = cv2.Canny(img,100,200)
-	contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+	im2,contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 
 	areas = np.array([cv2.contourArea(c) for c in contours])
 	contours = np.array(contours)
@@ -105,21 +105,47 @@ def detectDrug(path):
 
 	return drugShape, color
 
-print('circle', detectDrug('PanLine.jpeg'))
-print('circle', detectDrug('PanAE.jpeg'))
-print('circle', detectDrug('57272104_2251544638493290_760916686994931712_n.jpg'))
+print('panLine', detectDrug('PanLine.jpeg'))
+print('panAE', detectDrug('PanAE.jpeg'))
+print('brufin', detectDrug('bruf.jpg'))
 
-print('cataflam1', detectDrug('Shapes/Cataflam/1.jpg'))
-print('cataflam2', detectDrug('Shapes/Cataflam/2.jpg'))
-print('cataflam3', detectDrug('Shapes/Cataflam/3.jpg'))
-print('cataflam4', detectDrug('Shapes/Cataflam/4.jpg'))
-print('cataflam5', detectDrug('Shapes/Cataflam/5.jpg'))
-print('cataflam6', detectDrug('Shapes/Cataflam/6.jpg'))
-print('cataflam7', detectDrug('Shapes/Cataflam/7.jpg'))
-print('cataflam8', detectDrug('Shapes/Cataflam/8.jpg'))
-print('cataflam9', detectDrug('Shapes/Cataflam/9.jpg'))
-print('cataflam10', detectDrug('Shapes/Cataflam/10.jpg'))
-print('cataflam11', detectDrug('Shapes/Cataflam/11.jpg'))
+# print('cataflam1', detectDrug('Shapes/Cataflam/1.jpg'))
+# print('cataflam2', detectDrug('Shapes/Cataflam/2.jpg'))
+# print('cataflam3', detectDrug('Shapes/Cataflam/3.jpg'))
+# print('cataflam4', detectDrug('Shapes/Cataflam/4.jpg'))
+# print('cataflam5', detectDrug('Shapes/Cataflam/5.jpg'))
+# print('cataflam6', detectDrug('Shapes/Cataflam/6.jpg'))
+# print('cataflam7', detectDrug('Shapes/Cataflam/7.jpg'))
+# print('cataflam8', detectDrug('Shapes/Cataflam/8.jpg'))
+# print('cataflam9', detectDrug('Shapes/Cataflam/9.jpg'))
+# print('cataflam10', detectDrug('Shapes/Cataflam/10.jpg'))
+# print('cataflam11', detectDrug('Shapes/Cataflam/11.jpg'))
+
+print('com1', detectDrug('com1.jpg'))
+print('com2', detectDrug('com2.jpg'))
+print('com3	', detectDrug('com3.jpg'))
+
+print('alpha1', detectDrug('alpha1.jpg'))
+print('alpha2', detectDrug('alpha2.jpg'))
+print('alpha3', detectDrug('alpha3.jpg'))
+
+
+print('kito1', detectDrug('kito1.jpg'))
+print('kito2', detectDrug('kito2.jpg'))
+print('kito3', detectDrug('kito3.jpg'))
+print('kito4', detectDrug('kito4.jpg'))
+
+
+print('milga1', detectDrug('milga1.jpg'))
+print('milga2', detectDrug('milga2.jpg'))
+print('milga3', detectDrug('milga3.jpg'))
+
+
+print('para1', detectDrug('para1.jpg'))
+print('para2', detectDrug('para2.jpg'))
+print('para3', detectDrug('para3.jpg'))
+print('para4', detectDrug('para4.jpg'))
+
 
 # print('hexagon', detectDrug('hexagon.png'))
 # print('rec', detectDrug('rec.jpg'))
