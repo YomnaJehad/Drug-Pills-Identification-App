@@ -136,9 +136,3 @@ class pill(APIView):
 		base64_string = request.data["img"]
 		pillDetected = getName(data_uri_to_cv2_img(base64_string))
 		return Response({"name":pillDetected[0], "description":pillDetected[1]}, status=status.HTTP_200_OK)
-
-# class pill(APIView):
-#     def post(self, request):
-#         base64_string = request.data["img"]
-#         shapeDetected = detectShape(data_uri_to_cv2_img(base64_string))
-#         return Response({"len":shapeDetected[0], "pred":shapeDetected[1]}, status=status.HTTP_200_OK)

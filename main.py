@@ -192,42 +192,42 @@ def getName(path):
 
 # print('cataflam', detectDrug('cataflamsada.png'))
 
-print('Expected: ', 'Milga','Result: ',getName('milga1.jpg'))
-print('Expected: ', 'Milga','Result: ',getName('milga2.jpg'))
-print('Expected: ', 'Milga','Result: ',getName('milga3.jpg'))
+print('Expected: ', 'Milga','Result: ',getName('images/milga1.jpg'))
+print('Expected: ', 'Milga','Result: ',getName('images/milga2.jpg'))
+print('Expected: ', 'Milga','Result: ',getName('images/milga3.jpg'))
 print('\n')
-print('Expected: ', 'com','Result: ',getName('com1.jpg'))
-print('Expected: ', 'com','Result: ',getName('com2.jpg'))
-print('Expected: ', 'com','Result: ',getName('com3.jpg'))
+print('Expected: ', 'com','Result: ',getName('images/com1.jpg'))
+print('Expected: ', 'com','Result: ',getName('images/com2.jpg'))
+print('Expected: ', 'com','Result: ',getName('images/com3.jpg'))
 print('\n')
-print('Expected: ', 'alpha','Result: ',getName('alpha1.jpg'))
-print('Expected: ', 'alpha','Result: ',getName('alpha2.jpg'))
-print('Expected: ', 'alpha','Result: ',getName('alpha3.jpg'))
+print('Expected: ', 'alpha','Result: ',getName('images/alpha1.jpg'))
+print('Expected: ', 'alpha','Result: ',getName('images/alpha2.jpg'))
+print('Expected: ', 'alpha','Result: ',getName('images/alpha3.jpg'))
 print('\n')
-print('Expected: ', 'kito','Result: ',getName('kito1.jpg'))
-print('Expected: ', 'kito','Result: ',getName('kito2.jpg'))
-print('Expected: ', 'kito','Result: ',getName('kito3.jpg'))
-print('Expected: ', 'kito','Result: ',getName('kito4.jpg'))
-
-print('\n')
-
-print('Expected: ', 'para','Result: ',getName('para1.jpg'))
-print('Expected: ', 'para','Result: ',getName('para2.jpg'))
-print('Expected: ', 'para','Result: ',getName('para3.jpg'))
-print('Expected: ', 'para','Result: ',getName('para4.jpg'))
+print('Expected: ', 'kito','Result: ',getName('images/kito1.jpg'))
+print('Expected: ', 'kito','Result: ',getName('images/kito2.jpg'))
+print('Expected: ', 'kito','Result: ',getName('images/kito3.jpg'))
+print('Expected: ', 'kito','Result: ',getName('images/kito4.jpg'))
 
 print('\n')
 
-print('Expected: ', 'pan','Result: ',getName('PanAE.jpeg'))
-print('Expected: ', 'pan','Result: ',getName('PanLine.jpeg'))
+print('Expected: ', 'para','Result: ',getName('images/para1.jpg'))
+print('Expected: ', 'para','Result: ',getName('images/para2.jpg'))
+print('Expected: ', 'para','Result: ',getName('images/para3.jpg'))
+print('Expected: ', 'para','Result: ',getName('images/para4.jpg'))
 
 print('\n')
 
-print('Expected: ', 'Bruffin','Result: ',getName('bruf.jpg'))
+print('Expected: ', 'pan','Result: ',getName('images/PanAE.jpeg'))
+print('Expected: ', 'pan','Result: ',getName('images/PanLine.jpeg'))
 
 print('\n')
 
-print('Expected: ', 'cataflam','Result: ',getName('cataflamsada.png'))
+print('Expected: ', 'Bruf','Result: ',getName('images/bruf.jpg'))
+
+print('\n')
+
+print('Expected: ', 'cata','Result: ',getName('images/cataflamsada.png'))
 
 print('\n')
 
