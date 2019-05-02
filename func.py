@@ -133,8 +133,8 @@ def getName(path):
 	dictt[("Circle", "red")] = "Milga"
 	#Panadol
 	dictt[("Ellipse", "white")] = "Panadol"
-	#Bruffin
-	dictt[("Circle", "pink")] = "Bruffin"
+	#Brufen
+	dictt[("Circle", "pink")] = "Brufen"
 	#Ketofan
 	dictt[("Ellipse", "yellow")] = "Ketofan"
 	#Paracetamol
