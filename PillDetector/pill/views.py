@@ -17,6 +17,28 @@ def data_uri_to_cv2_img(uri):
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     return img
 
+def rgb2hsv(r, g, b):
+    r = r / 255.0
+    g = g / 255.0
+    b = b / 255.0
+    mx = max(r, g, b)
+    mn = min(r, g, b)
+    df = mx-mn
+    if mx == mn:
+        h = 0
+    elif mx == r:
+        h = (60 * ((g-b)/df) + 360) % 360
+    elif mx == g:
+        h = (60 * ((b-r)/df) + 120) % 360
+    elif mx == b:
+        h = (60 * ((r-g)/df) + 240) % 360
+    if mx == 0:
+        s = 0
+    else:
+        s = df/mx
+    v = mx
+    return h, s, v
+
 
 def detectShape(img):
 	# img= cv2.imread(path,1)
@@ -52,14 +74,24 @@ def detectShape(img):
 	colors = np.array(cv2.mean(newImage)).astype(np.uint8)
 	prediction = 'n.a.'
 
-	# using rbg
-	prediction = knn_classifier.main('training.data', np.array([colors[2], colors[1], colors[0]]))
+	hsvImage = cv2.cvtColor(newImage, cv2.COLOR_BGR2HSV)
+	hsvImage[:,:,1]=hsvImage[:,:,1] *2.5
+	backImage = cv2.cvtColor(hsvImage, cv2.COLOR_HSV2BGR)
 
-	# using hsv
-	# colors = rgb2hsv(colors[2], colors[1], colors[0])
-	# prediction = knn_classifier.main('newData.data', np.array([colors[0], colors[1], colors[2]]))
-	# print(colors[2], colors[1], colors[0])
+	# using rbg
+	backColors = np.array(cv2.mean(backImage)).astype(np.uint8)
+	prediction = knn_classifier.main('training.data', np.array([backColors[2], backColors[1], backColors[0]]))
+	if prediction =='white':
+		#RED GREEN BLUE
+		if backColors[2] >= 180 and backColors[1] >= 150 and backColors[0] <= 90 :
+			prediction = 'other'	
+
+	if prediction == 'other':
+		# using hsv
+		colors = rgb2hsv(colors[2], colors[1], colors[0])
+		prediction = knn_classifier.main('newData.data', np.array([colors[0], colors[1], colors[2]]))
 	return len(approx), prediction, contours[0]
+
 
 
 def detectDrug(img):
@@ -82,6 +114,29 @@ def detectDrug(img):
 		drugShape = 'Circle'
 	return drugShape, color
 
+def getName(path):
+	Name = 'UNDEFINED'
+	dictt = {}
+	#Milga
+	dictt[("Circle", "red")] = "Milga"
+	#Panadol
+	dictt[("Ellipse", "white")] = "Panadol"
+	#Brufen
+	dictt[("Circle", "pink")] = "Brufen"
+	#Ketofan
+	dictt[("Ellipse", "yellow")] = "Ketofan"
+	#Paracetamol
+	dictt[("Circle", "white")] = "Paracetamol"
+	#Comtrex
+	dictt[("Ellipse", "red")] = "Comtrex"
+	#Alphintern
+	dictt[("Circle", "blue")] = "Alphintern"
+	#Cataflam
+	dictt[("Circle", "orange")] = "Cataflam"
+
+	drugShape, color = detectDrug(path)
+	Name = dictt[(drugShape, color)]
+	return Name
 
 class pill(APIView):
     def post(self, request):

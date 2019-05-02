@@ -35,7 +35,7 @@ def detectShape(path):
 	
 	drugShape = 'UNDEFINED'
 	edges = cv2.Canny(img,100,200)
-	im2,contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+	contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 
 	areas = np.array([cv2.contourArea(c) for c in contours])
 	contours = np.array(contours)
@@ -192,42 +192,42 @@ def getName(path):
 
 # print('cataflam', detectDrug('cataflamsada.png'))
 
-print'Expected: ', 'Milga','Result: ',getName('milga1.jpg')
-print'Expected: ', 'Milga','Result: ',getName('milga2.jpg')
-print'Expected: ', 'Milga','Result: ',getName('milga3.jpg')
+print('Expected: ', 'Milga','Result: ',getName('milga1.jpg'))
+print('Expected: ', 'Milga','Result: ',getName('milga2.jpg'))
+print('Expected: ', 'Milga','Result: ',getName('milga3.jpg'))
 print('\n')
-print'Expected: ', 'com','Result: ',getName('com1.jpg')
-print'Expected: ', 'com','Result: ',getName('com2.jpg')
-print'Expected: ', 'com','Result: ',getName('com3.jpg')
+print('Expected: ', 'com','Result: ',getName('com1.jpg'))
+print('Expected: ', 'com','Result: ',getName('com2.jpg'))
+print('Expected: ', 'com','Result: ',getName('com3.jpg'))
 print('\n')
-print'Expected: ', 'alpha','Result: ',getName('alpha1.jpg')
-print'Expected: ', 'alpha','Result: ',getName('alpha2.jpg')
-print'Expected: ', 'alpha','Result: ',getName('alpha3.jpg')
+print('Expected: ', 'alpha','Result: ',getName('alpha1.jpg'))
+print('Expected: ', 'alpha','Result: ',getName('alpha2.jpg'))
+print('Expected: ', 'alpha','Result: ',getName('alpha3.jpg'))
 print('\n')
-print'Expected: ', 'kito','Result: ',getName('kito1.jpg')
-print'Expected: ', 'kito','Result: ',getName('kito2.jpg')
-print'Expected: ', 'kito','Result: ',getName('kito3.jpg')
-print'Expected: ', 'kito','Result: ',getName('kito4.jpg')
-
-print('\n')
-
-print'Expected: ', 'para','Result: ',getName('para1.jpg')
-print'Expected: ', 'para','Result: ',getName('para2.jpg')
-print'Expected: ', 'para','Result: ',getName('para3.jpg')
-print'Expected: ', 'para','Result: ',getName('para4.jpg')
+print('Expected: ', 'kito','Result: ',getName('kito1.jpg'))
+print('Expected: ', 'kito','Result: ',getName('kito2.jpg'))
+print('Expected: ', 'kito','Result: ',getName('kito3.jpg'))
+print('Expected: ', 'kito','Result: ',getName('kito4.jpg'))
 
 print('\n')
 
-print'Expected: ', 'pan','Result: ',getName('PanAE.jpeg')
-print'Expected: ', 'pan','Result: ',getName('PanLine.jpeg')
+print('Expected: ', 'para','Result: ',getName('para1.jpg'))
+print('Expected: ', 'para','Result: ',getName('para2.jpg'))
+print('Expected: ', 'para','Result: ',getName('para3.jpg'))
+print('Expected: ', 'para','Result: ',getName('para4.jpg'))
 
 print('\n')
 
-print 'Expected: ', 'Bruffin','Result: ',getName('bruf.jpg')
+print('Expected: ', 'pan','Result: ',getName('PanAE.jpeg'))
+print('Expected: ', 'pan','Result: ',getName('PanLine.jpeg'))
 
 print('\n')
 
-print'Expected: ', 'cataflam','Result: ',getName('cataflamsada.png')
+print('Expected: ', 'Bruffin','Result: ',getName('bruf.jpg'))
+
+print('\n')
+
+print('Expected: ', 'cataflam','Result: ',getName('cataflamsada.png'))
 
 print('\n')
 
