@@ -8,6 +8,7 @@ import io
 import numpy as np
 import numpy as np
 from . import knn_classifier
+import json
 
 # Create your views here.
 
@@ -114,32 +115,30 @@ def detectDrug(img):
 		drugShape = 'Circle'
 	return drugShape, color
 
-def getName(path):
-	Name = 'UNDEFINED'
-	dictt = {}
-	#Milga
-	dictt[("Circle", "red")] = "Milga"
-	#Panadol
-	dictt[("Ellipse", "white")] = "Panadol"
-	#Brufen
-	dictt[("Circle", "pink")] = "Brufen"
-	#Ketofan
-	dictt[("Ellipse", "yellow")] = "Ketofan"
-	#Paracetamol
-	dictt[("Circle", "white")] = "Paracetamol"
-	#Comtrex
-	dictt[("Ellipse", "red")] = "Comtrex"
-	#Alphintern
-	dictt[("Circle", "blue")] = "Alphintern"
-	#Cataflam
-	dictt[("Circle", "orange")] = "Cataflam"
+def getName(img):
+	name = "UNDEFINED"
+	description = "UNDEFINED"
+	shape, color = detectDrug(img)
 
-	drugShape, color = detectDrug(path)
-	Name = dictt[(drugShape, color)]
-	return Name
+	with open("details.json", encoding='utf-8-sig') as json_file:
+		json_data = json.load(json_file)
+	# print(json_data)
+	for element in json_data:
+		print(element)
+		if shape == element["shape"] and color == element["color"]:
+			name = element["name"]
+			description = element["description"]
+
+	return name, description
 
 class pill(APIView):
-    def post(self, request):
-        base64_string = request.data["img"]
-        shapeDetected = detectShape(data_uri_to_cv2_img(base64_string))
-        return Response({"len":shapeDetected[0], "pred":shapeDetected[1]}, status=status.HTTP_200_OK)
+	def post(self, request):
+		base64_string = request.data["img"]
+		pillDetected = getName(data_uri_to_cv2_img(base64_string))
+		return Response({"name":pillDetected[0], "description":pillDetected[1]}, status=status.HTTP_200_OK)
+
+# class pill(APIView):
+#     def post(self, request):
+#         base64_string = request.data["img"]
+#         shapeDetected = detectShape(data_uri_to_cv2_img(base64_string))
+#         return Response({"len":shapeDetected[0], "pred":shapeDetected[1]}, status=status.HTTP_200_OK)
