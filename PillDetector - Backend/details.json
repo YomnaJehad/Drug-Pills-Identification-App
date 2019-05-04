@@ -1,0 +1,50 @@
+[
+    {
+        "name":"Milga",
+        "shape":"Circle",
+        "color":"red",
+        "description":"Milga Tablet is used for Permanent nerve damage, Vitamin b12 deficiency, Prevention of complications of diabetes, Deficiency of vitamin b12, Gastric trouble, Thiamine deficiency, Stomach problem, Heart disease, High cholesterol, Clogged arteries and other conditions."
+    },
+    {
+        "name":"Panadol",
+        "shape":"Ellipse",
+        "color":"white",
+        "description":"Panadol Tablets are a mild analgesic and antipyretic, and are recommended for the treatment of most painful and febrile conditions, for example, headache including migraine and tension headaches, toothache, backache, rheumatic and muscle pains, dysmenorrhoea, sore throat, and for relieving the fever, aches and pains of colds and flu. Also recommended for the symptomatic relief of pain due to non-serious arthritis. "
+    },
+    {
+        "name":"Brufen",
+        "shape":"Circle",
+        "color":"pink",
+        "description":"Brufen Tablet is indicated for its analgesic and anti-inflammatory effects in the treatment of rheumatoid arthritis, ankylosing spondylitis, osteoarthritis and other non-rheumatoid (seronegative) arthropathies. In the treatment of non-articular rheumatic conditions, frozen shoulder, bursitis, tendonitis, tenosynovitis and low back pain, soft tissue injuries such as sprains and strains, relief of mild to moderate pain such as dysmenorrhoea, dental and post-operative pain and for symptomatic relief of headache, including migraine headache."
+    },
+    {
+        "name":"Ketofan",
+        "shape":"Ellipse",
+        "color":"yellow",
+        "description":"Ketofan Tablet is a nonsteroidal antiinflammatory drug (NSAID) used in treatment of acute pain and chronic arthritis. It has been linked to a low rate of serum enzyme elevations during therapy and to rare instances of clinically apparent acute liver injury."
+    },
+    {
+        "name":"Paracetamol",
+        "shape":"Circle",
+        "color":"white",
+        "description":"Paracetamol Tablet, also known as acetaminophen and APAP, is a medication used to treat pain and fever. It is typically used for mild to moderate pain relief. It is also used for severe pain, such as cancer pain and pain after surgery, in combination with opioid pain medication. Effects last between 2 to 4 hours. "
+    },
+    {
+        "name":"Comtrex",
+        "shape":"Ellipse",
+        "color":"red",
+        "description":"Comtrex Tablet is a combination medicine used to treat headache, fever, body aches, cough, runny nose, sneezing, itching, and watery eyes caused by allergies, the common cold, or the flu. It will not treat a cough that is caused by smoking, asthma, or emphysema."
+    },
+    {
+        "name":"Alphintern",
+        "shape":"Circle",
+        "color":"green",
+        "description":"Alphintern Tablet is used for Osteoarthritis, Digestive problems, Wound-cleansing, Hand fractures, Gastric ulcer, Cataract surgery, Burns, Wound cleaning, Wound repair, Oedema related to injury and dental procedures and other conditions."
+    },
+    {
+        "name":"Cataflam",
+        "shape":"Circle",
+        "color":"orange",
+        "description":"Cataflam Tablet is a nonsteroidal anti-inflammatory drug (NSAID). IT is used to treat mild to moderate pain, or signs and symptoms of osteoarthritis or rheumatoid arthritis and menstrual cramps."
+    }
+]

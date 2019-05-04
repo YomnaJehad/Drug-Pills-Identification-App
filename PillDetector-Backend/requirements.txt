@@ -1,7 +1,0 @@
-Django==2.2
-django-cors-headers==2.5.3
-djangorestframework==3.9.2
-gunicorn==19.9.0
-numpy==1.16.2
-django-heroku
-opencv-python-headless

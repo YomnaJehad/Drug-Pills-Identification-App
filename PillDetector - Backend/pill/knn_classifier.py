@@ -2,6 +2,8 @@ import csv
 import random
 import math
 import operator
+import os
+from django.conf import settings
 
 
 # calculation of euclidead distance
@@ -43,7 +45,7 @@ def responseOfNeighbors(neighbors):
 
 # Load image feature data to training feature vectors and test feature vector
 def loadDataset(filename, training_feature_vector=[]):
-    with open(filename) as csvfile:
+    with open(os.path.join(settings.BASE_DIR, filename)) as csvfile:
         lines = csv.reader(csvfile)
         dataset = list(lines)
         for x in range(len(dataset)):
