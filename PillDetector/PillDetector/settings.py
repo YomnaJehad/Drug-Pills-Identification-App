@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +27,7 @@ SECRET_KEY = '61yzdh@61=j9tij8-@!(q52!#tzddzd4=hs%1sz29xh@qpj6m8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['192.168.1.7']
 
 
 # Application definition
@@ -82,7 +83,9 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:4201',
     'localhost:8000',
     '127.0.0.1:4200',
-    'localhost:8100'
+    '192.168.1.7',
+    'localhost:8100',
+    '192.168.1.6',
 )
 
 
@@ -135,4 +138,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+django_heroku.settings(locals())
