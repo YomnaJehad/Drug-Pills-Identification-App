@@ -29,69 +29,71 @@ def rgb2hsv(r, g, b):
     return h, s, v
 
 def detectShape(path):
-	# for detecting the contour of the pill and its length, and the pill's predicted color
+    # for detecting the contour of the pill and its length, and the pill's predicted color
 
-	img= cv2.imread(path,1)
-	imgheight= img.shape[0]
-	imgwidth = img.shape[1]
-	img = cv2.resize(img, (int(imgwidth * (480 / imgheight)), 480)) 
-	img = cv2.GaussianBlur(img, (3,3), 0) # Gaussian blurring to remove noise in the image 
-	kernel = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]])
-	img = cv2.filter2D(img, -1, kernel)
-	
-	drugShape = 'UNDEFINED' # initializing the drug shape
-	edges = cv2.Canny(img,100,200) # detecting the edges to identify the pill
-	contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE) # finding the contours in the image
+    img= cv2.imread(path,1)
+    imgheight= img.shape[0]
+    imgwidth = img.shape[1]
+    img = cv2.resize(img, (int(imgwidth * (480 / imgheight)), 480))
+    img = cv2.GaussianBlur(img, (3,3), 0) # Gaussian blurring to remove noise in the image 
+    kernel = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]])
+    # img = cv2.filter2D(img, -1, kernel)
 
-	areas = np.array([cv2.contourArea(c) for c in contours]) # array of the areas of all contours
-	contours = np.array(contours) # array of all contours in the image 
-	arr1inds = areas.argsort() # sorting contours 
-	contours = contours[arr1inds[::-1]] # descendingly, as the pill will be tha largest contour
-	approx = cv2.approxPolyDP(contours[0], 0.01*cv2.arcLength(contours[0],True), True)	
-	x,y,w,h = cv2.boundingRect(contours[0]) # offsets - with this you get 'mask'
-	cv2.drawContours(img, [contours[0]], 0,(255,0,0), 2)
-	# cv2.imshow(path, img)
+    drugShape = 'UNDEFINED' # initializing the drug shape
+    edges = cv2.Canny(img,100,200) # detecting the edges to identify the pill
+    contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE) # finding the contours in the image
 
-	# to get the average of the colors inside the largest contour "inside the pill"
-	newIM = img[y:y+h,x:x+w]
-	yn = newIM.shape[0]
-	xn = newIM.shape[1]
-	# cv2.rectangle(im,(x,y),(x+w,y+h),(0,255,0),2)
-	y=y + int(yn * 15/100)
-	h=h - int(yn * 30/100)
-	x=x + int(xn * 15/100) 
-	w=w - int(xn * 30/100)
-	# cv2.imshow(path, img)
-	newImage = img[y:y+h,x:x+w] # inside the contour
-	colors = np.array(cv2.mean(newImage)).astype(np.uint8) # average of the colors inside newImage
-	prediction = 'n.a.'
+    areas = np.array([cv2.contourArea(c) for c in contours]) # array of the areas of all contours
+    contours = np.array(contours) # array of all contours in the image 
+    arr1inds = areas.argsort() # sorting contours
+    contours = contours[arr1inds[::-1]] # descendingly, as the pill will be tha largest contour
 
-	# increase saturation before white detection for light colors elimination
-	# cv2.imshow('before', newImage)
-	hsvImage = cv2.cvtColor(newImage, cv2.COLOR_BGR2HSV)
-	hsvImage[:,:,1]=hsvImage[:,:,1] *2.5 # increasing the saturation of the color
-	backImage = cv2.cvtColor(hsvImage, cv2.COLOR_HSV2BGR)
- 	# cv2.imshow('after', backImage)
+    approx = cv2.approxPolyDP(contours[0], 0.01*cv2.arcLength(contours[0],True), True)	
+    x,y,w,h = cv2.boundingRect(contours[0]) # offsets - with this you get 'mask'
 
-	# using BGR
-	backColors = np.array(cv2.mean(backImage)).astype(np.uint8) # average of colors after increasing the saturation
-	# the prediction of the color classifier RGB
-	prediction = knn_classifier.main('training.data', np.array([backColors[2], backColors[1], backColors[0]]))
-	# print(np.array([backColors[2], backColors[1], backColors[0]]))
-	print([backColors[2], backColors[1], backColors[0]])
-	if prediction =='white': # for white only not the light colors
-		#RED GREEN BLUE
-		if backColors[2] >= 180 and backColors[1] >= 150 and backColors[0] <= 90 : # it will not be white using trial and error
-			prediction = 'other'	
+    cv2.drawContours(img, [contours[0]], 0,(255,0,0), 2)
 
-	if prediction == 'other':
-		# using HSV
-		colors = rgb2hsv(colors[2], colors[1], colors[0])
-		# the prediction of the color classifier HSV
-		prediction = knn_classifier.main('newData.data', np.array([colors[0], colors[1], colors[2]]))
-		# print(colors[2], colors[1], colors[0])
+    # to get the average of the colors inside the largest contour "inside the pill"
+    newIM = img[y:y+h,x:x+w]
+    yn = newIM.shape[0]
+    xn = newIM.shape[1]
 
-	return len(approx), prediction, contours[0]
+    y=y + int(yn * 20/100)
+    h=h - int(yn * 40/100)
+    x=x + int(xn * 20/100) 
+    w=w - int(xn * 30/100)
+
+    newImage = img[y:y+h,x:x+w] # inside the contour
+    colors = np.array(cv2.mean(newImage)).astype(np.uint8) # average of the colors inside newImage
+    prediction = 'n.a.'
+
+    # increase saturation before white detection for light colors elimination
+    hsvImage = cv2.cvtColor(newImage, cv2.COLOR_BGR2HSV)
+    hsvImage[:,:,1]=hsvImage[:,:,1] * 2.5 # increasing the saturation of the color
+    backImage = cv2.cvtColor(hsvImage, cv2.COLOR_HSV2BGR)
+
+    # using BGR
+    backColors = np.array(cv2.mean(backImage)).astype(np.uint8) # average of colors after increasing the saturation
+    # the prediction of the color classifier RGB
+    prediction = knn_classifier.main('training.data', np.array([backColors[2], backColors[1], backColors[0]]))
+    if prediction =='white': # for white only not the light colors
+        #RED GREEN BLUE
+        if backColors[2] >= 180 and backColors[1] >= 150 and backColors[0] <= 90 : # it will not be white using trial and error
+            prediction = 'other'	
+        else:
+            backColors = np.array(cv2.mean(newImage)).astype(np.uint8) # average of colors after increasing the saturation
+            # the prediction of the color classifier RGB
+            prediction = knn_classifier.main('training.data', np.array([backColors[2], backColors[1], backColors[0]]))
+            
+            if backColors[2] >= 180 and backColors[1] >= 150 and backColors[0] <= 90 : # it will not be white using trial and error
+                prediction = 'other'
+
+    if prediction == 'other':
+        # using HSV
+        colors = rgb2hsv(colors[2], colors[1], colors[0])
+        # the prediction of the color classifier HSV
+        prediction = knn_classifier.main('newData.data', np.array([colors[0], colors[1], colors[2]]))
+    return len(approx), prediction, contours[0]
 
 def detectDrug(path):
 	# for detecting pill's shape and color
@@ -146,10 +148,10 @@ def getName(path):
 	return Name
 
 
-# print('Expected: ', 'test','Result: ',getName('download.png'))
-# try:
-# except:
-# 	pass
+try:
+    print('Expected: ', 'test','Result: ',getName('download.png'))
+except:
+	pass
 #testing
 # print('Expected: ', 'Milga','Result: ',getName('images/milga2.jpg'))
 # print('Expected: ', 'Milga','Result: ',getName('images/milga3.jpg'))
@@ -176,9 +178,9 @@ print('\n')
 # print('Expected: ', 'pan','Result: ',getName('images/PanLine.jpeg'))
 # print('\n')
 # print('Expected: ', 'Bruf','Result: ',getName('images/bruf.jpg'))
-print('\n')
-print('Expected: ', 'cata','Result: ',getName('images/cataflamsada.png'))
-print('\n')
+# print('\n')
+# print('Expected: ', 'cata','Result: ',getName('images/cataflamsada.png'))
+# print('\n')
 
 cv2.waitKey()
 
